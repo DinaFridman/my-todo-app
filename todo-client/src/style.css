@@ -1,0 +1,104 @@
+:root {
+  --primary: #6366f1;
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #1e293b;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+  margin: 0;
+}
+
+#app {
+  background: var(--card);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary);
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input[type="text"]:focus {
+  border-color: var(--primary);
+}
+
+button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: opacity 0.2s;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background: #f1f5f9;
+  margin-bottom: 8px;
+  padding: 12px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.delete-btn {
+  background: #ef4444;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+}
+.status-btn {
+  background: transparent;
+  font-size: 1.2rem;
+  padding: 5px;
+  margin-left: 10px;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+.status-btn:hover { transform: scale(1.2); }
+.done { color: #22c55e; } /* ירוק */
+.pending { color: #ef4444; } /* אדום */
+.text-done { text-decoration: line-through; opacity: 0.6; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
