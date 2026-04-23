@@ -2,16 +2,19 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// הגדרת חיבור ל-SQLite (יוצר קובץ מקומי במקום שרת MySQL)
+// משיכת מחרוזת החיבור מה-JSON
+var connectionString = builder.Configuration.GetConnectionString("ToDoDB");
+
+// הגדרת ה-DB (MySQL)
 builder.Services.AddDbContext<ToDoDbContext>(options =>
-    options.UseSqlite("Data Source=todo.db"));
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 builder.Services.AddCors(options => options.AddPolicy("AllowAll", 
     p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
 var app = builder.Build();
 
-// יצירת מסד הנתונים אוטומטית אם הוא לא קיים
+// יצירת טבלאות אוטומטית
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<ToDoDbContext>();
