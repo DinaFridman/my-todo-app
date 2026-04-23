@@ -1,6 +1,6 @@
 import './style.css';
 
-const apiUrl = "http://localhost:5102/items";
+const apiUrl = "https://my-todo-app-final.onrender.com/items";
 
 const input = document.getElementById('todoInput') as HTMLInputElement;
 const btn = document.getElementById('addBtn');
