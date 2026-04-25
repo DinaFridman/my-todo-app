@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "G:\\דינה\\הנדסאים\\פרוייקטים פרקטיקוד\\פרוייקט 4\\TodoApi\\TodoApi.csproj": {}
+    "E:\\דינה\\הנדסאים\\פרוייקטים פרקטיקוד\\פרוייקט 4\\TodoApi\\TodoApi.csproj": {}
   },
   "projects": {
-    "G:\\דינה\\הנדסאים\\פרוייקטים פרקטיקוד\\פרוייקט 4\\TodoApi\\TodoApi.csproj": {
+    "E:\\דינה\\הנדסאים\\פרוייקטים פרקטיקוד\\פרוייקט 4\\TodoApi\\TodoApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\דינה\\הנדסאים\\פרוייקטים פרקטיקוד\\פרוייקט 4\\TodoApi\\TodoApi.csproj",
+        "projectUniqueName": "E:\\דינה\\הנדסאים\\פרוייקטים פרקטיקוד\\פרוייקט 4\\TodoApi\\TodoApi.csproj",
         "projectName": "TodoApi",
-        "projectPath": "G:\\דינה\\הנדסאים\\פרוייקטים פרקטיקוד\\פרוייקט 4\\TodoApi\\TodoApi.csproj",
+        "projectPath": "E:\\דינה\\הנדסאים\\פרוייקטים פרקטיקוד\\פרוייקט 4\\TodoApi\\TodoApi.csproj",
         "packagesPath": "C:\\Users\\דינה\\.nuget\\packages\\",
-        "outputPath": "G:\\דינה\\הנדסאים\\פרוייקטים פרקטיקוד\\פרוייקט 4\\TodoApi\\obj\\",
+        "outputPath": "E:\\דינה\\הנדסאים\\פרוייקטים פרקטיקוד\\פרוייקט 4\\TodoApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
