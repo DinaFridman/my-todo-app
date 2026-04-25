@@ -1,14 +1,15 @@
 import './style.css';
 
-const apiUrl = "https://my-todo-app-final.onrender.com/items";
+// הכתובת הבסיסית של השרת שלך
+const baseUrl = "https://my-todo-app-final.onrender.com";
 
 const input = document.getElementById('todoInput') as HTMLInputElement;
 const btn = document.getElementById('addBtn');
 const list = document.getElementById('todoList');
 
-// 1. פונקציה שמציגה את המשימות עם ה-V וה-X
+// 1. הצגת משימות (GET ל- /items)
 async function fetchItems() {
-    const res = await fetch(apiUrl);
+    const res = await fetch(`${baseUrl}/items`);
     const items = await res.json();
     if (list) {
         list.innerHTML = items.map((item: any) => `
@@ -25,10 +26,10 @@ async function fetchItems() {
     }
 }
 
-// 2. פונקציה להוספת משימה
+// 2. הוספת משימה (POST ל- /items)
 async function addItem() {
     if (!input || !input.value) return;
-    await fetch(apiUrl, {
+    await fetch(`${baseUrl}/items`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: input.value, isComplete: false })
@@ -37,15 +38,15 @@ async function addItem() {
     fetchItems();
 }
 
-// 3. פונקציה למחיקת משימה
+// 3. מחיקת משימה (DELETE ל- /items/{id})
 (window as any).deleteItem = async (id: number) => {
-    await fetch(`${apiUrl}/${id}`, { method: 'DELETE' });
+    await fetch(`${baseUrl}/items/${id}`, { method: 'DELETE' });
     fetchItems();
 };
 
-// 4. פונקציה לשינוי סטטוס (V/X)
+// 4. שינוי סטטוס (PUT ל- /items/{id})
 (window as any).toggleComplete = async (id: number, name: string, currentStatus: boolean) => {
-    await fetch(`${apiUrl}/${id}`, {
+    await fetch(`${baseUrl}/items/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: id, name: name, isComplete: !currentStatus })
