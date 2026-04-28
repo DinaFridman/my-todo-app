@@ -2,14 +2,14 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. הגדרת מסד הנתונים - בודק אם יש מחרוזת חיבור, אם לא משתמש ב-SQLite מקומי
+// 1. הגדרת מסד הנתונים
 var connectionString = builder.Configuration.GetConnectionString("ToDoDB");
 
 builder.Services.AddDbContext<ToDoDbContext>(options =>
 {
     if (string.IsNullOrEmpty(connectionString))
     {
-        options.UseSqlite("Data Source=todo.db"); // פתרון זמני כדי שיעבוד לך עכשיו!
+        options.UseSqlite("Data Source=todo.db");
     }
     else
     {
@@ -17,10 +17,12 @@ builder.Services.AddDbContext<ToDoDbContext>(options =>
     }
 });
 
-// 2. הגדרת CORS - פתוח לכולם כדי שלא יהיו שגיאות
+// 2. הגדרת CORS - בצורה שתעבוד בטוח
 builder.Services.AddCors(options => {
-    options.AddDefaultPolicy(policy => {
-        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    options.AddPolicy("OpenPolicy", policy => {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
     });
 });
 
@@ -33,9 +35,10 @@ using (var scope = app.Services.CreateScope())
     db.Database.EnsureCreated();
 }
 
-app.UseCors(); // הפעלת ה-CORS
+// 3. הפעלת ה-CORS עם השם שהגדרנו (חייב לבוא לפני ה-Map)
+app.UseCors("OpenPolicy");
 
-// נתיבי ה-API (הקוד המצוין שלך)
+// נתיבי ה-API
 app.MapGet("/items", async (ToDoDbContext db) => await db.Items.ToListAsync());
 
 app.MapPost("/items", async (ToDoDbContext db, Item item) => {
