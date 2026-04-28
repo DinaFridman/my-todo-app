@@ -2,22 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. הגדרת מסד הנתונים
-var connectionString = builder.Configuration.GetConnectionString("ToDoDB");
-
-builder.Services.AddDbContext<ToDoDbContext>(options =>
-{
-    if (string.IsNullOrEmpty(connectionString))
-    {
-        options.UseSqlite("Data Source=todo.db");
-    }
-    else
-    {
-        options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-    }
-});
-
-// 2. הגדרת CORS - בצורה שתעבוד בטוח
+// 1. הגדרת CORS - חייב לבוא לפני ה-Build
 builder.Services.AddCors(options => {
     options.AddPolicy("OpenPolicy", policy => {
         policy.AllowAnyOrigin()
@@ -26,16 +11,20 @@ builder.Services.AddCors(options => {
     });
 });
 
+// 2. הגדרת מסד הנתונים - SQLite פשוט כדי שלא יקרוס
+builder.Services.AddDbContext<ToDoDbContext>(options =>
+    options.UseSqlite("Data Source=todo.db"));
+
 var app = builder.Build();
 
-// יצירת טבלאות אוטומטית
+// יצירת הטבלאות
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<ToDoDbContext>();
     db.Database.EnsureCreated();
 }
 
-// 3. הפעלת ה-CORS עם השם שהגדרנו (חייב לבוא לפני ה-Map)
+// 3. הפעלת ה-CORS
 app.UseCors("OpenPolicy");
 
 // נתיבי ה-API
