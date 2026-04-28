@@ -1,7 +1,7 @@
 import './style.css';
 
 // הכתובת הבסיסית של השרת שלך
-const baseUrl = "https://my-todo-app-tajo.onrender.com/items";
+const baseUrl = "https://my-todo-app-tajo.onrender.com";
 
 const input = document.getElementById('todoInput') as HTMLInputElement;
 const btn = document.getElementById('addBtn');
